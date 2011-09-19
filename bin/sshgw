@@ -1,4 +1,6 @@
 #!/usr/bin/ruby
 require 'lib/sshgw'
 
+puts "sshgw version : #{Sshgw::VERSION}"
+
 Sshgw.hello
