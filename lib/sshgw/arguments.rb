@@ -33,5 +33,6 @@ module Sshgw
       end
     end
     optparse.parse!(args)
+    return @options
   end
 end

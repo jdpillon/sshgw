@@ -1,7 +1,22 @@
 #!/usr/bin/ruby
+require 'net/ssh'
 require 'lib/sshgw.rb'
+require 'highline/import'
 
 puts "sshgw version : #{Sshgw::VERSION}"
 
 
-Sshgw::parse(ARGV)
+options = Sshgw::parse(ARGV)
+
+# Create user on ssh gateway server
+root_password = ask("Enter root password for #{options[:gwhost]}") { |q| q.echo = "*" }
+
+
+Net::SSH.start(options[:gwhost], 'root', {:password => root_password}) do |ssh|
+  gw_user_name = options[:user].to_s + "-" + options[:internalhost].to_s
+  puts "Creating #{gw_user_name} on #{options[:gwhost]}"
+  cmd = "useradd -m " + gw_user_name.to_s
+  output = ssh.exec!(cmd)
+  puts output
+  puts "Copying local public key to #{gw_user_name}@#{options[:gwhost]}:.ssh/authorized_key"
+end
