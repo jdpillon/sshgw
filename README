@@ -1,1 +1,2 @@
+clear ; rake build ; sudo gem install pkg/sshgw-0.0.2.gem
 sshgw -n jdpillon -t 192.168.200.107 -f archifact -a deploy
