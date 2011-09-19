@@ -1,0 +1,5 @@
+require 'lib/sshgw'
+
+m = Sshgw.new
+
+m.hello
