@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
-require 'lib/sshgw'
+require 'lib/sshgw.rb'
 
 puts "sshgw version : #{Sshgw::VERSION}"
 
-Sshgw.hello
+Sshgw::hello
