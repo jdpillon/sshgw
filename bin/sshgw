@@ -1,6 +1,4 @@
 #!/usr/bin/ruby
 require 'lib/sshgw'
 
-m = Sshgw.new
-
-m.hello
+Sshgw.hello
