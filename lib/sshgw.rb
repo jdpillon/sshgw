@@ -1,7 +1,7 @@
 require "sshgw/version"
+require "sshgw/arguments"
 
 module Sshgw
-  # Your code goes here...
   def self.hello
     puts "Hello from sshgw..."
   end
