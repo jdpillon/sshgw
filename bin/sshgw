@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
 require 'lib/sshgw.rb'
-require 'optparse'
 
 puts "sshgw version : #{Sshgw::VERSION}"
 
