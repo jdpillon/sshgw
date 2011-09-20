@@ -33,6 +33,7 @@ module Sshgw
       end
     end
     optparse.parse!(args)
+    @options[:internaluser] = @options[:user] unless @options[:internaluser]
     return @options
   end
 end
