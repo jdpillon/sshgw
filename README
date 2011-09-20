@@ -1,3 +1,19 @@
 clear ; rake build ; sudo gem install pkg/sshgw-0.0.2.gem
 sshgw -n jdpillon -t 192.168.200.107 -f archifact -a deploy
 clear ; rake build ; sudo gem install pkg/sshgw-0.0.2.gem
+
+
+    local_host = LocalHost.new 'localhost', 'jdpillon'
+
+    gateway_host = GatewayHost.new '192.168.200.107', 'webserver'
+
+    remote_host = RemoteHost.new 'webserver','deploy'
+    local_host.connect
+    gateway_host.connect
+    remote_host.connect
+    local_host.exec('hostname')
+    gateway_host.exec('hostname')
+    gateway_host.exec('hostname', remote_host.name)
+    
+    gateway_host.gateway.shutdown!
+
