@@ -1,37 +1,5 @@
 #!/usr/bin/ruby
-require 'rubygems'
-require 'net/ssh'
-require 'net/scp'
 require 'lib/sshgw.rb'
-require 'highline/import' # ask("...")
 
-puts "sshgw version : #{Sshgw::VERSION}"
+Sshgw::run
 
-
-options = Sshgw::parse(ARGV)
-
-# Create user on ssh gateway server
-gw_user_name = options[:user].to_s + "-" + options[:internalhost].to_s
-
-puts "I will create the user #{gw_user_name} on #{options[:gwhost]},\nthen add #{options[:user]}'s public key to #{gw_user_name}@#{options[:gwhost]}:.ssh/authorized_key.\n\n"
-
-rep = ask("Are you ok with this ? (y/n)")
-if rep == 'y' or rep =='Y'
-  root_password = ask("Enter root password for #{options[:gwhost]}") { |q| q.echo = "*" }
-  Net::SSH.start(options[:gwhost], 'root', {:password => root_password}) do |ssh|
-    puts "Creating #{gw_user_name} on #{options[:gwhost]}"
-    cmd = "useradd -m " + gw_user_name.to_s
-    output = ssh.exec!(cmd)
-    puts output if output
-    # upload a file to a remote server
-    user_home = "/home/"+gw_user_name
-    ssh_dir = user_home + ".ssh"
-    cmd = "mkdir " + ssh_dir
-    ssh.exec!(cmd)
-    puts "Copying local public key to #{gw_user_name}@#{options[:gwhost]}:.ssh/authorized_key"
-    ssh.scp.upload!("/home/"+options[:user]+"/.ssh/id_rsa.pub", "/home/"+gw_user_name+"/.ssh/#{options[:user]}")
-  end
-else
-  puts "Ok, bye!"
-  exit
-end
