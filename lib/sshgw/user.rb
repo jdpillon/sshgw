@@ -45,14 +45,13 @@ module Sshgw
     end
     def authorized_keys
       # Return the user's authorized_keys file content
-      c=""
       begin
-        c = @ssh.scp.download! @authorized_keys_path
+        @ssh.scp.download! @authorized_keys_path
       rescue
         puts "#{@authorized_keys_path} does not exist yet!"
         @ssh.exec!("touch #{@authorized_keys_path}")
         @ssh.exec!("chown #{@name}:#{@name} #{@authorized_keys_path}")
-        c = @ssh.scp.download! @authorized_keys_path
+        @ssh.scp.download! @authorized_keys_path
       end  
     end
 

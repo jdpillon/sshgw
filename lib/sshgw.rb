@@ -30,7 +30,9 @@ module Sshgw
       append_user_key_to_authorized_keys_file(local_host,gateway_host)
       puts "All done !"
       puts "Now try :"
-      puts "ssh #{gateway_host.user.name}@#{gateway_host.remote_host.name}"
+      puts "ssh #{gateway_host.user.name}@#{gateway_host.name}"
+      puts "and you should be asked for #{gateway_host.remote_host.user.name}@#{gateway_host.remote_host.name}"
+      puts "Enjoy !"
       exit
     else
       puts "Ok, bye!"
