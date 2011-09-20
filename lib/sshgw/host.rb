@@ -59,7 +59,7 @@ module Sshgw
       end
     end
     def create_user
-      puts "Creating #{user.name}"
+      puts "Creating user #{user.name} on #{name}"
       exec("useradd -m #{user.name}")
       exec("mkdir #{user.ssh_path}")
       exec("chown #{user.name}:#{user.name} #{user.ssh_path}")

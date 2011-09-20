@@ -25,7 +25,9 @@ module Sshgw
     def key
       # Return the user's key file content
       key = ""
-      File.open @key_path { |f| key+=f.read }
+      File.open @key_path do |f|
+        key+=f.read
+      end
     end
 
   end

@@ -28,6 +28,10 @@ module Sshgw
       gateway_host.connect
       gateway_host.create_user
       append_user_key_to_authorized_keys_file(local_host,gateway_host)
+      puts "All done !"
+      puts "Now try :"
+      puts "ssh #{gateway_host.user.name}@#{gateway_host.remote_host.name}"
+      exit
     else
       puts "Ok, bye!"
       exit
