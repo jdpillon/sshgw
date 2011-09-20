@@ -8,9 +8,7 @@ require 'highline/import' # ask("...")
 module Sshgw
   def self.append_user_key_to_authorized_keys_file(from, to)
     puts "Adding local user #{from.user.name}'s key to #{to.user.name} authorized_keys file."
-
-    content = "#{to.user.authorized_keys}\ncommand=\"ssh -t #{to.remote_host.user.name}@#{to.remote_host.name}\" #{from.user.key}\n"
-    to.user.authorized_keys=content
+    to.user.authorized_keys = "#{to.user.authorized_keys}\ncommand=\"ssh -t #{to.remote_host.user.name}@#{to.remote_host.name}\" #{from.user.key}\n"
   end
 
   def self.run
@@ -26,7 +24,7 @@ module Sshgw
     puts "Create #{gateway_host.user.name} user on #{gateway_host.name},"
     puts "then add #{local_host.user.name}'s public key to #{gateway_host.user.name}@#{gateway_host.name}:#{gateway_host.user.authorized_keys_path} with the command option :"
     puts "command='ssh -t #{gateway_host.remote_host.user.name}@#{gateway_host.remote_host.name}' ssh-rsa..."
-    puts "When done, add #{gateway_host.user.name}'s public key to #{gateway_host.remote_host.user.name}@#{gateway_host.remote_host.name}:#{gateway_host.remote_host.user.authorized_keys_path}."
+    #puts "When done, add #{gateway_host.user.name}'s public key to #{gateway_host.remote_host.user.name}@#{gateway_host.remote_host.name}:#{gateway_host.remote_host.user.authorized_keys_path}."
     rep = ask("Are you ok with this ? (y/n)")
     
 
