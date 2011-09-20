@@ -32,12 +32,6 @@ module Sshgw
       @user = LocalUser.new user_name
       # ssh object to handle connections
     end
-    def connect
-      puts "Connected to local host"
-    end
-    def exec(cmd)
-      system(cmd)
-    end
   end
   # The host used as ssh gateway
   class GatewayHost < Host
@@ -61,7 +55,7 @@ module Sshgw
 
     def exec(cmd, host = 'localhost')
       @gateway.ssh(host,'root',:password => @password) do |ssh|
-        puts ssh.exec!(cmd)
+        ssh.exec!(cmd)
       end
     end
     def create_user
@@ -78,9 +72,6 @@ module Sshgw
     def initialize(name_or_ip, user_name)
       @name = name_or_ip
       @user = RemoteUser.new user_name
-    end
-    def connect
-      @password = ask("Enter root password for #{name}") { |q| q.echo = "*" }
     end
   end
 end

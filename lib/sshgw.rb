@@ -12,22 +12,18 @@ module Sshgw
   end
 
   def self.run
-    options = Sshgw::parse(ARGV)
-    # TODO : Add authors here
     puts "sshgw version : #{Sshgw::VERSION}"
+    puts "Jacques-Daniel PILLON <jdpillon@lesalternatives.org>"
+    options = Sshgw::parse(ARGV)
 
     local_host                = LocalHost.new 'localhost', options[:user]
     gateway_host              = GatewayHost.new options[:gwhost], options[:internalhost]
     gateway_host.remote_host  = RemoteHost.new options[:internalhost], options[:internaluser] 
 
-    #gw_host = Sshgw::Host.new options[:gwhost], options[:user], options[:internalhost], options[:internaluser]
     puts "Create #{gateway_host.user.name} user on #{gateway_host.name},"
     puts "then add #{local_host.user.name}'s public key to #{gateway_host.user.name}@#{gateway_host.name}:#{gateway_host.user.authorized_keys_path} with the command option :"
     puts "command='ssh -t #{gateway_host.remote_host.user.name}@#{gateway_host.remote_host.name}' ssh-rsa..."
-    #puts "When done, add #{gateway_host.user.name}'s public key to #{gateway_host.remote_host.user.name}@#{gateway_host.remote_host.name}:#{gateway_host.remote_host.user.authorized_keys_path}."
     rep = ask("Are you ok with this ? (y/n)")
-    
-
     if rep == 'y' or rep =='Y'
       gateway_host.connect
       gateway_host.create_user

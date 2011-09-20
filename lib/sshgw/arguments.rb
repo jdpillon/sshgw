@@ -5,7 +5,7 @@ module Sshgw
     @options = {}
 
     optparse = OptionParser.new do |opts|
-      opts.banner = "Jacques-Daniel PILLON <jdpillon@lesalternatives.org>\nUsage : sshgw -n username -t sshgw-host -f hidden-srv -a username_on_hiddensrv\n"
+      opts.banner = "Usage : sshgw -n username -t sshgw-host -f hidden-srv -a username_on_hiddensrv\n"
       opts.on('-n', '--new USER', 'Add user') do |user|
         @options[:user] = user
       end

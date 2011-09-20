@@ -1,3 +1,7 @@
+require 'net/ssh'
+require 'net/ssh/gateway'
+require 'net/scp'
+
 module Sshgw
   class User
     attr_accessor :name, :ssh_path, :authorized_keys_path
@@ -21,9 +25,7 @@ module Sshgw
     def key
       # Return the user's key file content
       key = ""
-      File.open @key_path do |file|
-        key+=file.read
-      end
+      File.open @key_path { |f| key+=f.read }
     end
 
   end
@@ -45,7 +47,7 @@ module Sshgw
       begin
         c = @ssh.scp.download! @authorized_keys_path
       rescue
-        puts "#{@authorized_keys_path} does not exist!"
+        puts "#{@authorized_keys_path} does not exist yet!"
         @ssh.exec!("touch #{@authorized_keys_path}")
         @ssh.exec!("chown #{@name}:#{@name} #{@authorized_keys_path}")
         c = @ssh.scp.download! @authorized_keys_path
