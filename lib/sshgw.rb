@@ -1,6 +1,6 @@
 require 'rubygems'
-require 'lib/sshgw/version'
-require 'lib/sshgw/arguments'
+require 'sshgw/version'
+require 'sshgw/arguments'
 require 'net/ssh'
 require 'net/ssh/gateway'
 require 'net/scp'
@@ -147,7 +147,7 @@ module Sshgw
   def self.append_user_key_to_authorized_keys_file(from, to)
     puts "Adding local user #{from.user.name}'s key to #{to.user.name} authorized_keys file."
 
-    content = "#{to.user.authorized_keys}\ncommand='ssh -t #{to.remote_host.user.name}@#{to.remote_host.name}' #{from.user.key}\n"
+    content = "#{to.user.authorized_keys}\ncommand=\"ssh -t #{to.remote_host.user.name}@#{to.remote_host.name}\" #{from.user.key}\n"
     to.user.authorized_keys=content
   end
 

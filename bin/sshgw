@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-require 'lib/sshgw.rb'
+require 'sshgw.rb'
 
 Sshgw::run
 
