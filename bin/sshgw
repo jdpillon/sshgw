@@ -23,12 +23,14 @@ if rep == 'y' or rep =='Y'
     cmd = "useradd -m " + gw_user_name.to_s
     output = ssh.exec!(cmd)
     puts output if output
+    # upload a file to a remote server
+    user_home = "/home/"+gw_user_name
+    ssh_dir = user_home + ".ssh"
+    cmd = "mkdir " + ssh_dir
+    ssh.exec!(cmd)
     puts "Copying local public key to #{gw_user_name}@#{options[:gwhost]}:.ssh/authorized_key"
-
+    ssh.scp.upload!("/home/"+options[:user]+"/.ssh/id_rsa.pub", "/home/"+gw_user_name+"/.ssh/#{options[:user]}")
   end
-  # upload a file to a remote server
-  root_password = ask("Enter root password for #{options[:gwhost]}") { |q| q.echo = "*" }
-  Net::SCP.upload!(options[:gwhost], "root", "/home/"+options[:user]+"/.ssh/id_rsa.pub", "/home/"+gw_user_name+"/.ssh/#{options[:user]}", :password => root_password)
 else
   puts "Ok, bye!"
   exit
