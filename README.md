@@ -9,16 +9,17 @@ What ?
 sshgw is a "simple" way to manage ssh gateway.
 
 Imagine :
-
+`
                                                              /--------------- Mail server
                                                             /
 You --------- Internet ---------- Firewall ----------- LocalNetwork --------- ssh gateway (ssh server on a machine)
                                                             \
                                                              \_______________ Web server
 
+`
 When your are on the local network, it is possible to connect to the web server or to the mail server by typing :
 
-ssh youruser@webserver or youruser@mailserver
+`ssh youruser@webserver or youruser@mailserver`
 
 But what are the solutions when your are outside of the local network ?
 
