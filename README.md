@@ -42,7 +42,7 @@ me@dev:~$ sshgw -n me -t ssh-gateway-srv -f webserver -a deploy<br>
 sshgw version : 0.0.3<br>
 Jacques-Daniel PILLON <jdpillon@lesalternatives.org><br>
 Create webserver user on ssh-gateway-srv,<br>
-then add me's public key to webserver@ssh-gateway-srv:/home/webserver/.ssh/authorized_keys with the command option :
+then add me's public key to webserver@ssh-gateway-srv:/home/webserver/.ssh/authorized_keys with the command option :<br>
 command='ssh -t deploy@webserver' ssh-rsa...<br>
 Are you ok with this ? (y/n)
 
