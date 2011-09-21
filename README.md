@@ -9,14 +9,16 @@ What ?
 sshgw is a "simple" way to manage ssh gateway.
 
 Imagine :
-`
-                                                             /--------------- Mail server
-                                                            /
-You --------- Internet ---------- Firewall ----------- LocalNetwork --------- ssh gateway (ssh server on a machine)
-                                                            \
-                                                             \_______________ Web server
 
-`
+                               /--------------- Mail server
+                              /
+You --- Internet --- Firewall --- LocalNetwork --- ssh gateway (ssh server on a machine)
+
+                              \
+                               \_______________ Web server
+
+
+
 When your are on the local network, it is possible to connect to the web server or to the mail server by typing :
 
 `ssh youruser@webserver or youruser@mailserver`
@@ -36,15 +38,17 @@ This is what sshgw is trying to do. In fact, not realy because sshgw is just a t
 
 For example (on your dev machine) :
 
-me@dev:~$ sshgw -n me -t ssh-gateway-srv -f webserver -a deploy
-sshgw version : 0.0.3
-Jacques-Daniel PILLON <jdpillon@lesalternatives.org>
-Create webserver user on ssh-gateway-srv,
+me@dev:~$ sshgw -n me -t ssh-gateway-srv -f webserver -a deploy<br>
+sshgw version : 0.0.3<br>
+Jacques-Daniel PILLON <jdpillon@lesalternatives.org><br>
+Create webserver user on ssh-gateway-srv,<br>
 then add me's public key to webserver@ssh-gateway-srv:/home/webserver/.ssh/authorized_keys with the command option :
-command='ssh -t deploy@webserver' ssh-rsa...
+command='ssh -t deploy@webserver' ssh-rsa...<br>
 Are you ok with this ? (y/n)
 
 
 
 
+
 Jacques-Daniel PILLON
+
